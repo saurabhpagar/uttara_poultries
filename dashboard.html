@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Uttaras Food</title>
+    <style>
+        /* Add your custom CSS styles here */
+        /* For example: */
+        .dashboard {
+            background-color: #f1f1f1;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            padding: 20px;
+            margin-bottom: 10px;
+        }
+
+        .card:hover {
+            background-color: #eaeaea;
+        }
+    </style>
+</head>
+<body>
+    <?php
+    // Manager details
+    $managerId = 1;
+    $managerName = "John Doe";
+    ?>
+
+    <div class="dashboard">
+        <div class="header">
+            <span>Manager ID: <?php echo $managerId; ?></span>
+            <span>Manager Name: <?php echo $managerName; ?></span>
+        </div>
+
+        <div class="content">
+            <div class="card" onclick="fetchAdditionalCards(this)">
+                <h2>Card 1</h2>
+                <p>Click to view more cards</p>
+            </div>
+
+            <div class="card" onclick="fetchAdditionalCards(this)">
+                <h2>Card 2</h2>
+                <p>Click to view more cards</p>
+            </div>
+        </div>
+
+        <div class="view-employees">
+            <div class="card">
+                <h2>View Employees</h2>
+                <p>Add your content here for viewing employees</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to fetch and add additional cards
+        function fetchAdditionalCards(card) {
+            // Make an AJAX request to fetch additional cards data
+            // Replace the setTimeout with your actual AJAX call
+            setTimeout(function() {
+                // Example additional card data
+                var additionalCardsData = [
+                    { title: 'Additional Card 1', content: 'Additional Card Content 1' },
+                    { title: 'Additional Card 2', content: 'Additional Card Content 2' }
+                ];
+
+                // Create new card elements and append them to the 'content' section of the dashboard
+                additionalCardsData.forEach(function(data) {
+                    var newCard = document.createElement('div');
+                    newCard.className = 'card';
+                    newCard.innerHTML = '<h2>' + data.title + '</h2><p>' + data.content + '</p>';
+                    card.parentNode.insertBefore(newCard, card.nextSibling);
+                });
+
+                // Remove the click event listener from the clicked card
+                card.removeEventListener('click', fetchAdditionalCards);
+            }, 500);
+        }
+    </script>
+</body>
+</html>
